@@ -1,68 +1,88 @@
-# CodeIgniter 4 Application Starter
+# CI4 Login Authentication Project
 
-## What is CodeIgniter?
+This project is a web application built with CodeIgniter 4 framework that provides user authentication features including registration, login, logout, and a protected dashboard accessible only to logged-in users.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Features
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- User registration with validation and password hashing
+- User login with session management
+- User logout
+- Dashboard accessible only to authenticated users
+- User data stored securely in a MySQL database
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Installation
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+1. Clone the repository or download the project files.
 
-## Installation & updates
+2. Install dependencies using Composer:
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+```bash
+composer install
+```
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+3. Copy the `.env` file from the example and configure it:
 
-## Setup
+```bash
+cp env .env
+```
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Edit the `.env` file to set your base URL and database connection settings:
 
-## Important Change with index.php
+```
+app.baseURL = 'http://localhost:8080/'
+database.default.hostname = localhost
+database.default.database = your_database_name
+database.default.username = your_db_username
+database.default.password = your_db_password
+database.default.DBDriver = MySQLi
+```
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+4. Run the database migrations to create the necessary tables:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+```bash
+php spark migrate
+```
 
-**Please** read the user guide for a better explanation of how CI4 works!
+5. Set your web server document root to the `public` directory of the project.
 
-## Repository Management
+6. Start the development server (optional):
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+```bash
+php spark serve
+```
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+## Usage
 
-## Server Requirements
+- Access the login page at: `/auth/login`
+- Access the registration page at: `/auth/register`
+- After login, you will be redirected to the dashboard at: `/dashboard`
+- Use the logout link to end the session.
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+## Database
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+The project uses a `users` table with the following fields:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+- `id` (primary key)
+- `name`
+- `email` (unique)
+- `password` (hashed)
+- `created_at`
+- `updated_at`
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+## Requirements
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+- PHP 8.1 or higher
+- PHP extensions:
+  - intl
+  - mbstring
+  - json (enabled by default)
+  - mysqlnd (if using MySQL)
+  - libcurl (if using HTTP\CURLRequest library)
+
+## License
+
+This project is open source and available under the MIT License.
+
+---
+
+For more information about CodeIgniter 4, visit the [official website](https://codeigniter.com) and the [user guide](https://codeigniter.com/user_guide/).
