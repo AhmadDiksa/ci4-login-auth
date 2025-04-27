@@ -1,82 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Product</title>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --link-color: #bb86fc;
-            --link-hover-color: #9a67ea;
-            --button-bg: #bb86fc;
-            --button-text: #121212;
-            --input-bg: #2c2c2c;
-            --input-text: #e0e0e0;
-            --input-border: #444;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: var(--link-hover-color);
-            text-decoration: underline;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            background-color: var(--input-bg);
-            color: var(--input-text);
-            border: 1px solid var(--input-border);
-            padding: 6px;
-            border-radius: 4px;
-            width: 300px;
-            font-size: 14px;
-        }
-
-        button,
-        a.button-link {
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            border: none;
-            padding: 6px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        button:hover,
-        a.button-link:hover {
-            background-color: #9a67ea;
-        }
-    </style>
+  <title>Edit Product</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Edit Product</h1>
-    <form action="/products/edit/<?= esc($product['id']) ?>" method="post">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" value="<?= esc($product['name']) ?>" required><br><br>
-
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description"><?= esc($product['description']) ?></textarea><br><br>
-
-        <label for="price">Price:</label><br>
-        <input type="number" step="0.01" id="price" name="price" value="<?= esc($product['price']) ?>" required><br><br>
-
-        <button type="submit">Update</button>
+<body class="bg-dark text-light">
+  <div class="container py-5">
+    <h1 class="mb-4">Edit Product</h1>
+    <form action="/products/edit/<?= esc($product['id']) ?>" method="post" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control bg-secondary text-light border-0" id="name" name="name" value="<?= esc($product['name']) ?>" required>
+        <div class="invalid-feedback">
+          Please enter the product name.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea class="form-control bg-secondary text-light border-0" id="description" name="description" rows="3"><?= esc($product['description']) ?></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price:</label>
+        <input type="number" step="0.01" class="form-control bg-secondary text-light border-0" id="price" name="price" value="<?= esc($product['price']) ?>" required>
+        <div class="invalid-feedback">
+          Please enter the product price.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+      <a href="/products" class="btn btn-secondary ms-2">Back to Products List</a>
     </form>
-    <br>
-    <a href="/products" class="button-link">Back to Products List</a>
+  </div>
+  <script>
+    (() => {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
 </body>
 </html>
