@@ -21,7 +21,7 @@ $routes->group('products', ['filter' => 'auth'], function($routes) {
     $routes->post('create', 'Products::create');
     $routes->get('edit/(:num)', 'Products::edit/$1');
     $routes->post('edit/(:num)', 'Products::edit/$1');
-    $routes->get('delete/(:num)', 'Products::delete/$1');
+    $routes->post('delete/(:num)', 'Products::delete/$1');
     $routes->get('exportPdf', 'Products::exportPdf');
     $routes->get('exportExcel', 'Products::exportExcel');
 });

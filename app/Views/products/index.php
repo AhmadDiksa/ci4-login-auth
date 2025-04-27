@@ -5,6 +5,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-dark text-light">
+  <nav style="background-color: #120025; padding: 10px 20px;">
+    <a href="/dashboard" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 1.2rem;">Dashboard</a>
+  </nav>
   <div class="container py-5">
     <h1 class="mb-4">Products</h1>
     <div class="mb-3">
@@ -32,7 +35,10 @@
               <td><?= esc($product['price']) ?></td>
               <td>
                 <a href="/products/edit/<?= esc($product['id']) ?>" class="btn btn-sm btn-warning me-1">Edit</a>
-                <a href="/products/delete/<?= esc($product['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                <form action="/products/delete/<?= esc($product['id']) ?>" method="post" style="display:inline;">
+                  <?= csrf_field() ?>
+                  <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
               </td>
             </tr>
           <?php endforeach; ?>

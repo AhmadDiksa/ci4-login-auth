@@ -7,7 +7,13 @@
 <body class="bg-dark text-light">
   <div class="container py-5">
     <h1 class="mb-4">Add New Product</h1>
-    <form action="/products/create" method="post" class="needs-validation" novalidate>
+  <form action="/products/create" method="post" class="needs-validation" novalidate>
+      <?= csrf_field() ?>
+      <?php if (isset($validation)): ?>
+        <div class="alert alert-danger">
+          <?= $validation->listErrors() ?>
+        </div>
+      <?php endif; ?>
       <div class="mb-3">
         <label for="name" class="form-label">Name:</label>
         <input type="text" class="form-control bg-secondary text-light border-0" id="name" name="name" required>

@@ -8,6 +8,7 @@
   <div class="container py-5">
     <h1 class="mb-4">Edit Product</h1>
     <form action="/products/edit/<?= esc($product['id']) ?>" method="post" class="needs-validation" novalidate>
+      <?= csrf_field() ?>
       <div class="mb-3">
         <label for="name" class="form-label">Name:</label>
         <input type="text" class="form-control bg-secondary text-light border-0" id="name" name="name" value="<?= esc($product['name']) ?>" required>

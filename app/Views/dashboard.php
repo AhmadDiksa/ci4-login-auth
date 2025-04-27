@@ -322,7 +322,8 @@
                 <div class="logo-text">Ahmad Diksa S</div>
             </div>
             <div class="nav-links">
-                <a href="#" class="active">Home</a>
+                <a href="/dashboard" class="active">Home</a>
+                <a href="/products">Products</a>
                 <a href="#">About us</a>
                 <a href="#">Service</a>
                 <a href="#">Contact</a>

@@ -26,7 +26,19 @@ class Products extends BaseController
 
     public function create()
     {
+        helper('form');
         if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'name' => 'required',
+                'price' => 'required|numeric',
+            ];
+
+            if (!$this->validate($rules)) {
+                return view('products/create', [
+                    'validation' => $this->validator,
+                ]);
+            }
+
             $this->productModel->save([
                 'name' => $this->request->getPost('name'),
                 'description' => $this->request->getPost('description'),
