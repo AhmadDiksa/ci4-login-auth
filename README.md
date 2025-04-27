@@ -1,6 +1,6 @@
-# CI4 Login Authentication Project
+# CI4 Login Authentication and Product Management Project
 
-This project is a web application built with CodeIgniter 4 framework that provides user authentication features including registration, login, logout, and a protected dashboard accessible only to logged-in users.
+This project is a web application built with the CodeIgniter 4 framework that provides user authentication features along with product management capabilities. It includes user registration, login, logout, a protected dashboard, and CRUD operations for products.
 
 ## Features
 
@@ -8,7 +8,8 @@ This project is a web application built with CodeIgniter 4 framework that provid
 - User login with session management
 - User logout
 - Dashboard accessible only to authenticated users
-- User data stored securely in a MySQL database
+- Product management (Create, Read, Update, Delete)
+- User and product data stored securely in a MySQL database
 
 ## Installation
 
@@ -43,9 +44,15 @@ database.default.DBDriver = MySQLi
 php spark migrate
 ```
 
-5. Set your web server document root to the `public` directory of the project.
+5. (Optional) Seed the database with sample products:
 
-6. Start the development server (optional):
+```bash
+php spark db:seed ProductsSeeder
+```
+
+6. Set your web server document root to the `public` directory of the project.
+
+7. Start the development server (optional):
 
 ```bash
 php spark serve
@@ -57,15 +64,27 @@ php spark serve
 - Access the registration page at: `/auth/register`
 - After login, you will be redirected to the dashboard at: `/dashboard`
 - Use the logout link to end the session.
+- Manage products via the dashboard with options to create, edit, view, and delete products.
 
 ## Database
 
-The project uses a `users` table with the following fields:
+The project uses the following tables:
+
+### users
 
 - `id` (primary key)
 - `name`
 - `email` (unique)
 - `password` (hashed)
+- `created_at`
+- `updated_at`
+
+### products
+
+- `id` (primary key)
+- `name`
+- `description`
+- `price`
 - `created_at`
 - `updated_at`
 
