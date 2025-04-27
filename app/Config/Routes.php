@@ -14,3 +14,14 @@ $routes->get('/auth/logout', 'Auth::logout');
 
 // Dashboard route (dengan filter auth)
 $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth']);
+
+$routes->group('products', ['filter' => 'auth'], function($routes) {
+    $routes->get('', 'Products::index');
+    $routes->get('create', 'Products::create');
+    $routes->post('create', 'Products::create');
+    $routes->get('edit/(:num)', 'Products::edit/$1');
+    $routes->post('edit/(:num)', 'Products::edit/$1');
+    $routes->get('delete/(:num)', 'Products::delete/$1');
+    $routes->get('exportPdf', 'Products::exportPdf');
+    $routes->get('exportExcel', 'Products::exportExcel');
+});
